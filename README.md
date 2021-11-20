@@ -50,6 +50,9 @@ The there are also modules  used to run this application which can be referenced
     - Instructions on installing Redis on [Mac](https://phoenixnap.com/kb/install-redis-on-mac)
     - Instructions on installing Redis on [Windows](https://redis.com/ebook/appendix-a/a-3-installing-on-windows/a-3-2-installing-redis-on-window/)
 - Make a pull request or download the files from the GitHub repository
+- You need to make sure you have an IEX Cloud API Key before running the program.
 - In terminal navigate to root folder of project
+- Create a config.py file and type `API KEY = "yourapikey"` and save
 - In terminal type: `pip install -r requirements.txt` and push enter to download appropriate modules to run program
+- Be sure that redis is running before starting the program by typing the following in a Windows Subsystem for Linux or in Linux (ex. Ubuntu) `sudo service redis-server start`
 - Once packages are downloaded, in terminal type: `streamlit run stock_dashboard.py` and push enter to run the program

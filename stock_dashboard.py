@@ -7,7 +7,7 @@ from helpers import format_number, round_number
 
 redis_client = redis.Redis(host='localhost', port=6379, db=0)
 
-st.title("Fundamental Dashboard")
+st.title("Stock Overview Dashboard")
 
 symbol = st.sidebar.text_input("Symbol", value="MSFT").upper()
 
@@ -43,8 +43,11 @@ if screen == "Overview":
     col1, col2 = st.columns([1, 4])
 
     with col1:
-        st.image("https://placeimg.com/240/240/any")
-        # st.image(logo['url'])
+        try:
+            st.image(logo['url'])
+        except:
+            st.image("https://placeimg.com/240/240/any")
+
 
     with col2:
         st.subheader(company['companyName'])
@@ -57,42 +60,63 @@ if screen == "Overview":
 
 if screen == "Fundamentals":
     stats = stock.get_stats()
-    st.subheader('Market Cap')
-    st.write(format_number(stats['marketcap']))
 
-    st.subheader('PE Ratio')
-    st.write(round_number(stats['peRatio']))
+    col1, col2 = st.columns([4, 4])
 
-    st.subheader('52 Week High')
-    st.write(format_number(stats['week52high']))
+    with col1:
+        st.subheader('Market Cap')
+        st.write(format_number(stats['marketcap']))
 
-    st.subheader('52 Week Low')
-    st.write(format_number(stats['week52low']))
+        st.subheader('PE Ratio')
+        st.write(round_number(stats['peRatio']))
 
-    st.subheader('TTM Earns Per Share')
-    st.write(round_number(stats['ttmEPS']))
+        st.subheader('52 Week High')
+        st.write(format_number(stats['week52high']))
 
-    st.subheader('Dividend Yield')
-    st.write(round_number(stats['dividendYield']))
+        st.subheader('52 Week Low')
+        st.write(format_number(stats['week52low']))
 
-    st.subheader('TTM Dividend Rate')
-    st.write(round_number(stats['ttmDividendRate']))
+        st.subheader('TTM Earns Per Share')
+        st.write(round_number(stats['ttmEPS']))
+        
+    with col2:
+        st.subheader('Dividend Yield')
+        st.write(round_number(stats['dividendYield']))
 
-    st.subheader('Dividend Yield')
-    st.write(round_number(stats['dividendYield']))
+        st.subheader('TTM Dividend Rate')
+        st.write(round_number(stats['ttmDividendRate']))
 
-    st.subheader('One Month Change Percent')
-    st.write(round_number(stats['month1ChangePercent']))
+        st.subheader('Dividend Yield')
+        st.write(round_number(stats['dividendYield']))
 
-    st.subheader('One Year Change Percent')
-    st.write(round_number(stats['year1ChangePercent']))
+        st.subheader('One Month Change Percent')
+        st.write(round_number(stats['month1ChangePercent']))
 
-    st.subheader('Two Year Change Percent')
-    st.write(round_number(stats['year2ChangePercent']))
+        st.subheader('One Year Change Percent')
+        st.write(round_number(stats['year1ChangePercent']))
 
-    st.subheader('Five Year Change Percent')
-    st.write(round_number(stats['year5ChangePercent']))
+        st.subheader('Two Year Change Percent')
+        st.write(round_number(stats['year2ChangePercent']))
+
+        st.subheader('Five Year Change Percent')
+        st.write(round_number(stats['year5ChangePercent']))
 
 
 if screen == "News":
-    pass
+    news = stock.get_company_news()
+    st.subheader('News')
+
+    for article in news:
+        try:
+            st.image(article['image'])
+        except:
+            st.image("https://placeimg.com/240/240/any")
+        st.subheader(article['headline'])
+        st.write(f"Overview: {article['summary']}")
+        st.write(f"[Read More]({article['url']})")
+        st.write(f"Source: {article['source']}")
+        
+        if article['hasPaywall'] == True:
+            st.write("Paywall Article")
+        else:
+            st.write("Free Article")
