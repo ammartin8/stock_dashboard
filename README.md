@@ -4,7 +4,7 @@
 
 > Author: Amah Martin
 > Created: 11-14-2021
-> Last Updated: 11-14-2021
+> Last Updated:  11-20-2021
 
 ## Table of Contents
 
@@ -47,8 +47,8 @@ The there are also modules  used to run this application which can be referenced
 
 - Ensure you have Python 3 program downloaded first
 - Ensure that you have [Redis](https://redis.io/) installed
-    - Instructions on installing Redis on [Mac](https://phoenixnap.com/kb/install-redis-on-mac)
-    - Instructions on installing Redis on [Windows](https://redis.com/ebook/appendix-a/a-3-installing-on-windows/a-3-2-installing-redis-on-window/)
+  - Instructions on installing Redis on [Mac](https://phoenixnap.com/kb/install-redis-on-mac)
+  - Instructions on installing Redis on [Windows](https://redis.com/ebook/appendix-a/a-3-installing-on-windows/a-3-2-installing-redis-on-window/)
 - Make a pull request or download the files from the GitHub repository
 - You need to make sure you have an IEX Cloud API Key before running the program.
 - In terminal navigate to root folder of project
