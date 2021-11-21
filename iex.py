@@ -49,11 +49,11 @@ class IEXStock:
 
     #     return r.json()
 
-    # def get_institutional_ownership(self):
-    #     url = f"{self.BASE_URL}/stock/{self.symbol}/institutional-ownership?token={self.token}"
-    #     r = requests.get(url)
+    def get_institutional_ownership(self):
+        url = f"{self.BASE_URL}/stock/{self.symbol}/institutional-ownership?token={self.token}"
+        r = requests.get(url)
 
-    #     return r.json()
+        return r.json()
 
     # def get_insider_transactions(self):
     #     url = f"{self.BASE_URL}/stock/{self.symbol}/insider-transactions?token={self.token}"

@@ -1,9 +1,9 @@
 import streamlit as st
 import requests
-from datetime import timedelta
+from datetime import timedelta, datetime
 import config, json, redis
 from iex import IEXStock
-from helpers import format_number, round_number
+from helpers import format_number, round_number, convert_date
 
 redis_client = redis.Redis(host='localhost', port=6379, db=0)
 
@@ -46,7 +46,7 @@ if screen == "Overview":
         try:
             st.image(logo['url'])
         except:
-            st.image("https://placeimg.com/240/240/any")
+            st.image("https://placeimg.com/240/240/tech")
 
 
     with col2:
@@ -110,9 +110,9 @@ if screen == "News":
         try:
             st.image(article['image'])
         except:
-            st.image("https://placeimg.com/240/240/any")
+            st.image("https://placeimg.com/240/240/tech")
         st.subheader(article['headline'])
-        st.write(f"Overview: {article['summary']}")
+        st.write(f"{article['summary']}")
         st.write(f"[Read More]({article['url']})")
         st.write(f"Source: {article['source']}")
         
@@ -120,3 +120,20 @@ if screen == "News":
             st.write("Paywall Article")
         else:
             st.write("Free Article")
+        st.markdown("***")
+
+
+if screen == "Ownership":
+    ownership_info = stock.get_institutional_ownership()
+
+    st.subheader('Institutional Ownership')
+
+    c = st.container()
+
+    for inst_owner in ownership_info:
+        with c:
+            st.write(f"Entity Owner: {inst_owner['entityProperName']}")
+            st.write(f"Adjusted Holding: {format_number(inst_owner['adjHolding'])}")
+            st.write(f"Reported Holding: {format_number(inst_owner['reportedHolding'])}")
+            st.write(f"Filing Date: {convert_date(inst_owner['filingDate'])}")
+            st.markdown("***")

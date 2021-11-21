@@ -1,4 +1,4 @@
-import datetime
+import datetime as dt
 
 def format_number(number):
     """Formats a number to add commas"""
@@ -11,4 +11,5 @@ def round_number(number):
 
 def convert_date(date_num):
     """Converts integer date to date format"""
-    pass
+    format = "%Y-%m-%d"
+    return dt.datetime.strptime(date_num, format)
