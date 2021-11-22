@@ -14,7 +14,7 @@ symbol = st.sidebar.text_input("Symbol", value="MSFT").upper()
 stock = IEXStock(config.API_KEY, symbol)
 
 screen = st.sidebar.selectbox(
-    "View", ("Overview", "Fundamentals", "News", "Ownership", "Techincals"), index=0)
+    "View", ("Overview", "Fundamentals", "News", "Ownership", "Financials"), index=0)
 
 if screen == "Overview":
     logo_key = f"{symbol}_logo"
@@ -65,7 +65,7 @@ if screen == "Fundamentals":
 
     with col1:
         st.subheader('Market Cap')
-        st.write(format_number(stats['marketcap']))
+        st.write(f"${format_number(stats['marketcap'])}")
 
         st.subheader('PE Ratio')
         st.write(round_number(stats['peRatio']))
@@ -90,16 +90,16 @@ if screen == "Fundamentals":
         st.write(round_number(stats['dividendYield']))
 
         st.subheader('One Month Change Percent')
-        st.write(round_number(stats['month1ChangePercent']))
+        st.write(f"{round_number(stats['month1ChangePercent'])}%")
 
         st.subheader('One Year Change Percent')
-        st.write(round_number(stats['year1ChangePercent']))
+        st.write(f"{round_number(stats['year1ChangePercent'])}%")
 
         st.subheader('Two Year Change Percent')
-        st.write(round_number(stats['year2ChangePercent']))
+        st.write(f"{round_number(stats['year2ChangePercent'])}%")
 
         st.subheader('Five Year Change Percent')
-        st.write(round_number(stats['year5ChangePercent']))
+        st.write(f"{round_number(stats['year5ChangePercent'])}%")
 
 
 if screen == "News":
@@ -130,10 +130,29 @@ if screen == "Ownership":
 
     c = st.container()
 
-    for inst_owner in ownership_info:
+    for inst_owner in ownership_info: 
         with c:
-            st.write(f"Entity Owner: {inst_owner['entityProperName']}")
-            st.write(f"Adjusted Holding: {format_number(inst_owner['adjHolding'])}")
-            st.write(f"Reported Holding: {format_number(inst_owner['reportedHolding'])}")
-            st.write(f"Filing Date: {convert_date(inst_owner['filingDate'])}")
+            st.write(f"**Entity Owner:** {inst_owner['entityProperName']}")
+            st.write(f"**Adjusted Holding:** {format_number(inst_owner['adjHolding'])}")
+            st.write(f"**Reported Holding:** {format_number(inst_owner['reportedHolding'])}")
+            st.write(f"**Filing Date:** {convert_date(inst_owner['filingDate'])}")
             st.markdown("***")
+
+
+if screen == "Financials":
+    balance_sht_data = stock.get_balance_sheet()
+    income_stmt_data = stock.get_income_stmt()
+    cash_flow_data = stock.get_cash_flow()
+    
+    with st.expander("Balance Sheet"):
+        for bal_metric in balance_sht_data:
+            # st.write(f"**Fiscal Year:** {bal_metric[1]['fiscalYear']}")
+            pass
+        # st.write(balance_sht_data)
+        
+    with st.expander("Income Statement"):
+        pass
+
+    with st.expander("Cash Flow Statement"):
+        pass
+

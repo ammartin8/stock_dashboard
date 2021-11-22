@@ -43,20 +43,26 @@ class IEXStock:
 
     #     return r.json()
 
-    # def get_dividends(self, range='5y'):
-    #     url = f"{self.BASE_URL}/stock/{self.symbol}/dividends/{range}?token={self.token}"
-    #     r = requests.get(url)
-
-    #     return r.json()
-
     def get_institutional_ownership(self):
         url = f"{self.BASE_URL}/stock/{self.symbol}/institutional-ownership?token={self.token}"
         r = requests.get(url)
 
         return r.json()
 
-    # def get_insider_transactions(self):
-    #     url = f"{self.BASE_URL}/stock/{self.symbol}/insider-transactions?token={self.token}"
-    #     r = requests.get(url)
+    def get_income_stmt(self):
+        url = f"{self.BASE_URL}/stock/{self.symbol}/income?token={self.token}"
+        r = requests.get(url)
 
-    #     return r.json()
+        return r.json()
+
+    def get_balance_sheet(self):
+        url = f"{self.BASE_URL}/stock/{self.symbol}/balance-sheet?token={self.token}"
+        r = requests.get(url)
+
+        return r.json()
+
+    def get_cash_flow(self):
+        url = f"{self.BASE_URL}/stock/{self.symbol}/cash-flow?token={self.token}"
+        r = requests.get(url)
+
+        return r.json()

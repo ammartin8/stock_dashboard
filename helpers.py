@@ -1,5 +1,7 @@
 import datetime as dt
 
+from requests.api import post
+
 def format_number(number):
     """Formats a number to add commas"""
     return f"{number:,}"
@@ -10,6 +12,8 @@ def round_number(number):
     return f"{round(number,2)}"
 
 def convert_date(date_num):
-    """Converts integer date to date format"""
-    format = "%Y-%m-%d"
-    return dt.datetime.strptime(date_num, format)
+    """Converts string date to date format"""
+    pre_format = "%Y-%m-%d"
+    post_format = "%m-%d-%Y"
+    converted_dt = dt.datetime.strptime(date_num, pre_format)
+    return converted_dt.strftime(post_format)
