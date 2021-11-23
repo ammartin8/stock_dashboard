@@ -7,6 +7,8 @@ from helpers import format_number, round_number, convert_date
 
 redis_client = redis.Redis(host='localhost', port=6379, db=0)
 
+st.info('Note: The information listed in this dashboard is dummy data.')
+
 st.title("Stock Overview Dashboard")
 
 symbol = st.sidebar.text_input("Symbol", value="MSFT").upper()
@@ -145,10 +147,15 @@ if screen == "Financials":
     cash_flow_data = stock.get_cash_flow()
     
     with st.expander("Balance Sheet"):
-        for bal_metric in balance_sht_data:
-            # st.write(f"**Fiscal Year:** {bal_metric[1]['fiscalYear']}")
-            pass
-        # st.write(balance_sht_data)
+        st.write(f"**Fiscal Year:** {balance_sht_data['balancesheet'][0]['fiscalYear']}")
+        st.write(f"**Fiscal Date:** {convert_date(balance_sht_data['balancesheet'][0]['fiscalDate'])}")
+        st.write(f"**Report Date:** {convert_date(balance_sht_data['balancesheet'][0]['reportDate'])}")
+        st.write(f"**Current Assets:** ${format_number(balance_sht_data['balancesheet'][0]['currentAssets'])}")
+        st.write(f"**Current Cash:** ${format_number(balance_sht_data['balancesheet'][0]['currentCash'])}")
+        st.write(f"**Long Term Debt:** ${format_number(balance_sht_data['balancesheet'][0]['longTermDebt'])}")
+        st.write(f"**Total Assets:** ${format_number(balance_sht_data['balancesheet'][0]['totalAssets'])}")
+        st.write(f"**Total Current Liabilities:** ${format_number(balance_sht_data['balancesheet'][0]['totalCurrentLiabilities'])}")
+        st.write(f"**Total Liabilities:** ${format_number(balance_sht_data['balancesheet'][0]['totalLiabilities'])}")
         
     with st.expander("Income Statement"):
         pass
