@@ -158,8 +158,26 @@ if screen == "Financials":
         st.write(f"**Total Liabilities:** ${format_number(balance_sht_data['balancesheet'][0]['totalLiabilities'])}")
         
     with st.expander("Income Statement"):
-        pass
+        st.write(f"**Fiscal Year:** {income_stmt_data['income'][0]['fiscalYear']}")
+        st.write(f"**Fiscal Date:** {convert_date(income_stmt_data['income'][0]['fiscalDate'])}")
+        st.write(f"**Report Date:** {convert_date(income_stmt_data['income'][0]['reportDate'])}")
+        st.write(f"**Total Revenue:** ${format_number(income_stmt_data['income'][0]['totalRevenue'])}")
+        st.write(f"**Cost of Revenue:** ${format_number(income_stmt_data['income'][0]['costOfRevenue'])}")
+        st.write(f"**EBIT:** ${format_number(income_stmt_data['income'][0]['ebit'])}")
+        st.write(f"**Interest Income:** ${format_number(income_stmt_data['income'][0]['interestIncome'])}")
+        st.write(f"**Pretax Income:** ${format_number(income_stmt_data['income'][0]['pretaxIncome'])}")
+        st.write(f"**Income Tax:** ${format_number(income_stmt_data['income'][0]['incomeTax'])}")
+        st.write(f"**Net Income:** ${format_number(income_stmt_data['income'][0]['netIncome'])}")
 
     with st.expander("Cash Flow Statement"):
-        pass
+        st.write(f"**Fiscal Year:** {cash_flow_data['cashflow'][0]['fiscalYear']}")
+        st.write(f"**Fiscal Date:** {convert_date(cash_flow_data['cashflow'][0]['fiscalDate'])}")
+        st.write(f"**Report Date:** {convert_date(cash_flow_data['cashflow'][0]['reportDate'])}")
+        st.write(f"**Cash Flow:** ${format_number(cash_flow_data['cashflow'][0]['cashFlow'])}")
+        st.write(f"**Dividends Paid:** {format_number(cash_flow_data['cashflow'][0]['dividendsPaid'])}")
+        st.write(f"**Capital Expenditures:** ${format_number(cash_flow_data['cashflow'][0]['capitalExpenditures'])}")
+        st.write(f"**Net Borrowings:** ${format_number(cash_flow_data['cashflow'][0]['netBorrowings'])}")
+        st.write(f"**Cash Flow Financing:** ${format_number(cash_flow_data['cashflow'][0]['cashFlowFinancing'])}")
+        st.write(f"**Total Investing Cash Flows:** ${format_number(cash_flow_data['cashflow'][0]['totalInvestingCashFlows'])}")
+
 

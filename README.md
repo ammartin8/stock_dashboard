@@ -4,7 +4,7 @@
 
 > Author: Amah Martin
 > Created: 11-14-2021
-> Last Updated:  11-20-2021
+> Last Updated:  4-3-2022
 
 ## Table of Contents
 
@@ -26,7 +26,7 @@ The following main technologies are used to build this application:
 - Streamlit
 - Redis
 
-The there are also modules  used to run this application which can be referenced in the requirements.txt file.
+There are also modules  used to run this application which can be referenced in the requirements.txt file.
 
 ## Features
 
@@ -39,9 +39,9 @@ The there are also modules  used to run this application which can be referenced
 
 ## Milestones
 
-1. Create main view of dashboard
-2. Call data from API
-3. Store new API calls to in-memory database
+1. Create main view of dashboard ✔
+2. Call data from API ✔
+3. Store new API calls to in-memory database ✔
 
 ## Requirements to Run Application
 

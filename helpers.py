@@ -4,7 +4,10 @@ from requests.api import post
 
 def format_number(number):
     """Formats a number to add commas"""
-    return f"{number:,}"
+    if number != None:
+        return f"{number:,}"
+    else:
+        return f"N/A"
 
 
 def round_number(number):
