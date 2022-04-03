@@ -1,5 +1,4 @@
 import datetime as dt
-
 from requests.api import post
 
 def format_number(number):

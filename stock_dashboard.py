@@ -19,6 +19,7 @@ screen = st.sidebar.selectbox(
     "View", ("Overview", "Fundamentals", "News", "Ownership", "Financials"), index=0)
 
 if screen == "Overview":
+    # Logo Info
     logo_key = f"{symbol}_logo"
     logo = redis_client.get(logo_key)
 
@@ -30,16 +31,16 @@ if screen == "Overview":
         print("Loading logo from cache, serving from redis")
         logo = json.loads(logo)
 
+    #Company Info
     company_key = f"{symbol}_company"
     company = redis_client.get(company_key)
 
     if company is None:
-        print("Getting company info from IEX Cloud")
+        print("Could not find company info in cache, retrieving from IEX Cloud API")
         company = stock.get_company_info()
         redis_client.set(company_key, json.dumps(company))
-        redis_client.expire(company_key, timedelta(seconds=10))
     else:
-        print("Getting info from cache")
+        print("Loading company info from cache, serving from redis")
         company = json.loads(company)
 
     col1, col2 = st.columns([1, 4])
